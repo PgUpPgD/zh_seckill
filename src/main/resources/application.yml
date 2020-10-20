@@ -1,0 +1,32 @@
+server:
+  port: 8081
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/lx_skill?serverTimezone=Asia/Shanghai&useAffectedRows=true&useSSL=false&allowPublicKeyRetrieval=true
+    username: root
+    password: root
+    type: com.alibaba.druid.pool.DruidDataSource
+  redis:
+    host: 149.129.67.83
+    port: 6379
+    #    password:
+    database: 0
+    timeout: 10000
+  rabbitmq:
+    host: 149.129.67.83
+    port: 5672
+    username: guest
+    password: guest
+  main:
+    allow-bean-definition-overriding: true
+
+skill:
+  maxcount: 2
+  passkey: L/417pJvHIvWTSRD6IC9kg==
+
+mybatis:
+  mapper-locations: classpath*:/mapper/*.xml
+  type-aliases-package: com.zh.zh_seckill.entity
+  configuration:
+    map-underscore-to-camel-case: true

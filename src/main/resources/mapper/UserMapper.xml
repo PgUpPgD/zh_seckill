@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zh.zh_seckill.dao.UserDao">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="brm" type="com.zh.zh_seckill.entity.User">
+        <id column="uid" property="uid" />
+        <result column="phone" property="phone" />
+        <result column="password" property="password" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="bcl">
+        uid, phone, password
+    </sql>
+    <select id="login" resultMap="brm">
+        select <include refid="bcl"></include> from t_user where phone=#{phone}
+    </select>
+    <insert id="sign" parameterType="com.zh.zh_seckill.entity.User">
+        insert into t_user(phone, password) values(#{phone},#{password})
+    </insert>
+</mapper>

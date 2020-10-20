@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<!-- 
+
+                              _.._        ,------------.
+                           ,'      `.    (I want you! )
+                          /  __) __` \    `-,----------'
+                         (  (`-`(-')  ) _.-'
+                         /)  \  = /  (
+                        /'    |--' .  \
+                       (  ,---|  `-.)__`
+                        )(  `-.,--'   _`-.
+                       '/,'          (  Uu",
+                        (_       ,    `/,-' )
+                        `.__,  : `-'/  /`--'
+                          |     `--'  |
+                          `   `-._   /
+                           \        (
+                           /\ .      \.  
+                          / |` \     ,-\
+                         /  \| .)   /   \
+                        ( ,'|\    ,'     :
+                        | \,`.`--"/      }
+                        `,'    \  |,'    /
+                       / "-._   `-/      |
+                       "-.   "-.,'|     ;
+                      /        _/["---'""]
+                     :        /  |"-     '
+                     '           |      /
+                                 `      |
+
+-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="https://cdn.goeasy.io/goeasy-1.0.3.js"></script>
+</head>
+<body>
+    <!--接收消息-->
+    <div>
+        <div id="dvdata">
+
+        </div>
+    </div>
+    <div>
+        <!--发送消息-->
+        <p>
+            <input id="msg" placeholder="请输入发送的内容">
+            <button onclick="sendMsg()">发送消息</button>
+
+        </p>
+    </div>
+<script type="text/javascript">
+    //完成GoEasy的实例化
+    var goEasy = new GoEasy({
+        host:'hangzhou.goeasy.io', //应用所在的区域地址: 【hangzhou.goeasy.io |singapore.goeasy.io】
+        appkey: "BC-36808744fcda4503a8e8367e44297e9f", //替换为您的应用appkey
+    });
+    //订阅消息 接收服务端的消息
+    goEasy.subscribe({
+        channel: "my_channel", //替换为您自己的channel
+        onMessage: function (message) {
+             var d=document.getElementById("dvdata");
+             d.innerHTML +="<p>"+ message.content+"</p>";
+            console.log("Channel:" + message.channel + " content:" + message.content);
+        }
+    });
+    //发送消息
+    function sendMsg(){
+        var m=document.getElementById("msg").value;
+        if(m.length>0){
+            goEasy.publish({
+                    channel: "my_channel", //替换为您自己的channel
+                     message: m //替换为您想要发送的消息内容
+             });
+         }
+    }
+    //关闭 取消订阅
+    goEasy.subscribePresence({
+        channel: "my_channel",
+        onPresence: function(presenceEvents){
+            console.log("Presence events: ", JSON.stringify(presenceEvents));
+        }
+    });
+</script>
+</body>
+</html>

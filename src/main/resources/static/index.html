@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<!-- 
+
+                              _.._        ,------------.
+                           ,'      `.    (I want you! )
+                          /  __) __` \    `-,----------'
+                         (  (`-`(-')  ) _.-'
+                         /)  \  = /  (
+                        /'    |--' .  \
+                       (  ,---|  `-.)__`
+                        )(  `-.,--'   _`-.
+                       '/,'          (  Uu",
+                        (_       ,    `/,-' )
+                        `.__,  : `-'/  /`--'
+                          |     `--'  |
+                          `   `-._   /
+                           \        (
+                           /\ .      \.  
+                          / |` \     ,-\
+                         /  \| .)   /   \
+                        ( ,'|\    ,'     :
+                        | \,`.`--"/      }
+                        `,'    \  |,'    /
+                       / "-._   `-/      |
+                       "-.   "-.,'|     ;
+                      /        _/["---'""]
+                     :        /  |"-     '
+                     '           |      /
+                                 `      |
+
+-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>支付宝支付</title>
+</head>
+<body>
+    <!--1.生成支付二维码-->
+    <div>
+        <form method="post" action="http://localhost:8081/api/pay/aliPrecreate.do">
+            <div>
+                <label>商品名称：</label><input name="subject">
+            </div>
+            <div>
+                <label>订单编号：</label><input name="out_trade_no">
+            </div>
+            <div>
+                <label>订单金额：</label><input name="total_amount" value="0.01">
+            </div>
+            <div>
+                <input type="submit" value="发起支付">
+            </div>
+        </form>
+    </div>
+
+    <!--2.查询支付状态-->
+    <div>
+        <form method="post" action="http://localhost:8081/api/pay/aliQuery.do">
+            <div>
+                <label>输入订单号：</label><input name="out_trade_no">
+            </div>
+            <div><input type="submit" value="查询订单支付状态"></div>
+        </form>
+    </div>
+
+    <!--微信支付-->
+    <div>
+        <form method="post" action="http://localhost:8081/api/pay/wxpayprepay.do">
+            <div>
+                <label>商品名称：</label><input name="body">
+            </div>
+            <div>
+                <label>订单编号：</label><input name="out_trade_no">
+            </div>
+            <div> <input type="submit" value="发起支付"></div>
+        </form>
+    </div>
+
+</body>
+</html>
